@@ -41,12 +41,14 @@ class StoreUser(AbstractBaseUser, PermissionsMixin):
 
         validators=[phone_regex], max_length=17, unique=True)   # validators should be a list
     is_active = models.BooleanField(default=True)
-    created_at = models.DateTimeField()
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_staff=models.BooleanField(default=True)
+    token=models.CharField(max_length=400,blank=True,null=True)
     objects = UserManager()
 
     USERNAME_FIELD = 'phone_number'
     REQUIRED_FIELDS = []
+
 
     objects = UserManager()
 

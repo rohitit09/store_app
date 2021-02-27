@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework_jwt.utils import jwt_encode_handler, jwt_payload_handler
 
@@ -12,6 +13,7 @@ from .models import StoreUser
 class UserView(generics.CreateAPIView):
     queryset = StoreUser.objects.all()
     # serializer_class = StoreSerializer
+    permission_classes = [AllowAny, ]
 
     def post(self, request):
         if not self.request.data.get('phone_number'):
@@ -33,6 +35,7 @@ class UserView(generics.CreateAPIView):
 
 
 @api_view(['POST'])
+@permission_classes((AllowAny, ))
 def login(request):
     phone_number = request.data.get('phone_number')
     password = request.data.get('password')

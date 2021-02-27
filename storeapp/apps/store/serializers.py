@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from apps.store.models import Store, Category,Products,Orders
 
-class StoreSerializer(serializers.HyperlinkedModelSerializer):
+class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
         fields = ['id', 'name', 'address']

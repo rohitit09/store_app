@@ -29,6 +29,7 @@ class Store(models.Model):
     name=models.CharField(max_length=255)
     address=models.TextField()
     products = models.ManyToManyField(Products,blank=True)
+    # store_link=models.CharField(max_length=400,primary_key=True,unique=True)
 
 
     def __str__(self):
@@ -37,6 +38,11 @@ class Store(models.Model):
     class Meta:
         verbose_name='Store'
         verbose_name_plural='Stores'
+
+    def get_absolute_url(self):
+        return f"/view_store/{self.id}/"
+
+
 
 
 class Customer(models.Model):
